@@ -1,0 +1,97 @@
+﻿"Phrases"
+{
+	"rconwl_menu_option_name"
+	{
+		"es"		"Administrar la DB de RCON Whitelist"
+	}
+	"rconwl_menu_option_title"
+	{
+		"es"		"Administrar la DB de RCON Whitelist"
+	}
+	"rconwl_menu_option_disable"
+	{
+		"es"		"Desactivar una dirección"
+	}
+	"rconwl_menu_option_reload"
+	{
+		"es"		"Refrescar el caché de RCON Whitelist"
+	}
+	"rconwl_menu_option_list"
+	{
+		"es"		"Listar todas las direcciones permitidas"
+	}
+	"rconwl_menu_list_title"
+	{
+		"es"		"Lista de todas las direcciones permitidas"
+	}
+	"rconwl_menu_disable_title"
+	{
+		"es"		"Desactivar una dirección"
+	}
+	"rconwl_menu_disable_failed_get_info"
+	{
+		"#format"	"{1:i}"	//id
+		"es"		"No existe dirección con la ID {1} en la base de datos."
+	}
+	"rconwl_menu_disable_confirm"
+	{
+		"#format"	"{1:i},{2:i}{3:i}{4:i}{5:i}"	//id, ip array
+		"es"		"¿Estás seguro que queres desactivar la dirección {2}.{3}.{4}.{5} ({1})?"
+	}
+	"rconwl_menu_disable_notify"
+	{
+		"#format"	"{1:i},{2:i}{3:i}{4:i}{5:i}"
+		"es"		"Dirección {2}.{3}.{4}.{5} ({1}) desactivada."
+	}
+	"rconwl_menu_disable_notify_failed_dne"
+	{
+		"#format"	"{1:i}"	//id
+		"es"		"No se pudo desactivar la dirección, no se pudo encontrar una con ID {1}."
+	}
+	"rconwl_menu_disable_notify_failed_already_down"
+	{
+		"#format"	"{1:i}"	//id
+		"es"		"No se pudo desactivar la dirección, direccion {1} ya desactivada."
+	}
+	"rconwl_command_usage"
+	{
+		"#format"	"{1:s}"			//command string
+		"es"		"Uso: {1}."		//expands to "Uso: command <parameters>"
+	}
+	"rconwl_command_add_notify"
+	{
+		"#format"	"{1:i},{2:i}{3:i}{4:i}{5:i}"	//id, ip array
+		"es"		"Dirección IP: {2}.{3}.{4}.{5} añadida a la base de datos (id: {1})."
+	}
+	"rconwl_command_add_invalid_ip"
+	{
+		"es"		"No es una direccion IP."
+	}
+	"rconwl_yes"
+	{
+		"es"		"Si"
+	}
+	"rconwl_no"
+	{
+		"es"		"No"
+	}
+	"rconwl_notify_reload"
+	{
+		"es"		"Caché de RCON Whitelist refrescado."
+	}
+	"rconwl_log_added"
+	{
+		"#format"	"{1:L},{2:i},{3:i},{4:i},{5:i},{6:i}"	//log client, id, ip array
+		"es"		"\"{1}\" agregó una entrada en la base de datos de RCON Whitelist. ID: {2}. IP: {3}.{4}.{5}.{6}."
+	}
+	"rconwl_log_disabled"
+	{
+		"#format"	"{1:L},{2:i},{3:i},{4:i},{5:i},{6:i}"
+		"es"		"\"{1}\" desactivó una entrada en la base de datos de RCON Whitelist. ID: {2}. IP: {3}.{4}.{5}.{6}"
+	}
+	"rconwl_log_reload"
+	{
+		"#format"	"{1:L}"
+		"es"		"\"{1}\" Refrescó el caché de RCON Whitelist."
+	}
+}

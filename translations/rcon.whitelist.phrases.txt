@@ -1,0 +1,71 @@
+"Phrases"
+{
+	"reloading_cache"
+	{
+		"en"		"Reloading RCON Whitelist cache..."
+	}
+	"done"
+	{
+		"en"		"Done."
+	}
+	"allowed_rcon"
+	{
+		"en"		"Allowed RCON IP Addresses:"
+	}
+	"allowed_connecting"
+	{
+		"en"		"RCON Connection from a known IP address (%s) is being stablished (matched address %i), passing..."
+	}
+	"log_allowed_connecting"
+	{
+		"en"		"RCON Connection from a known IP address (%s) passed (matched address %i)."
+	}
+	"disallowed_connecting"
+	{
+		"en"		"RCON Connection from an unknown IP address (%s) is being stablished, rejecting..."
+	}
+	"log_disallowed_connecting"
+	{
+		"en"		"RCON Connection rejected from IP address (%s)."
+	}
+	"connection_failed"
+	{
+		"en"		"Failed to connect to the DataBase. Reported error: %s"
+	}
+	"failed_to_prepare"
+	{
+		"en"		"Failed to prepare query ('%s') to the database. Reported error: %s"
+	}
+	"failed_to_reload"
+	{
+		"en"		"Failed to reload cache. Reported error: %s"
+	}
+	"failed_to_get_addresses"
+	{
+		"en"		"Failed to get addresses from the database. Reported error: %s"
+	}
+	"failed_execute_query"
+	{
+		"en"		"Failed to execute query to the database. Reported error: %s"
+	}
+	"failed_to_insert"
+	{
+		"en"		"Failed to insert row in the database. Reported error: %s"
+	}
+	"failed_to_retrive_last_id"
+	{
+		"en"		"Failed to retrive addressid from last insertion id. Reported error: %s"
+	}
+	"failed_to_fetch_last_id"
+	{
+		"en"		"Failed to fetch inserted addressid from last insertion. Reported error: %s"
+	}
+	"failed_to_disable"
+	{
+		"en"		"Failed to disable address from the database. Reported error: %s"
+	}
+	"failed_to_get_info"
+	{
+		"en"		"Failed to get information of the address from the database. Reported error: %s"
+	}
+}

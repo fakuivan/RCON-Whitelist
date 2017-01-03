@@ -1,0 +1,97 @@
+﻿"Phrases"
+{
+	"rconwl_menu_option_name"
+	{
+		"en"		"Mangage the RCON Whitelist DB"
+	}
+	"rconwl_menu_option_title"
+	{
+		"en"		"Mangage the RCON Whitelist DB"
+	}
+	"rconwl_menu_option_disable"
+	{
+		"en"		"Disable an address"
+	}
+	"rconwl_menu_option_reload"
+	{
+		"en"		"Reload the RCON Whitelist cache"
+	}
+	"rconwl_menu_option_list"
+	{
+		"en"		"List all of the enabled addresses"
+	}
+	"rconwl_menu_list_title"
+	{
+		"en"		"List of all the enabled addresses"
+	}
+	"rconwl_menu_disable_title"
+	{
+		"en"		"Disable an address"
+	}
+	"rconwl_menu_disable_failed_get_info"
+	{
+		"#format"	"{1:i}"	//id
+		"en"		"Address with ID {1} not in the database."
+	}
+	"rconwl_menu_disable_confirm"
+	{
+		"#format"	"{1:i},{2:i}{3:i}{4:i}{5:i}"	//id, ip array
+		"en"		"Are you shure you want to disable {2}.{3}.{4}.{5} ({1})?"
+	}
+	"rconwl_menu_disable_notify"
+	{
+		"#format"	"{1:i},{2:i}{3:i}{4:i}{5:i}"	//id, ip array
+		"en"		"Successfully disabled Address {2}.{3}.{4}.{5} ({1})."
+	}
+	"rconwl_menu_disable_notify_failed_dne"
+	{
+		"#format"	"{1:i}"	//id
+		"en"		"Can't disable Address, ID {1} does not exist in the database."
+	}
+	"rconwl_menu_disable_notify_failed_already_down"
+	{
+		"#format"	"{1:i}"	//id
+		"en"		"Can't disable Address, ID {1} is already disabled."
+	}
+	"rconwl_command_usage"
+	{
+		"#format"	"{1:s}"			//command string
+		"en"		"Usage: {1}."	//expands to "Usage: command <parameters>"
+	}
+	"rconwl_command_add_notify"
+	{
+		"#format"	"{1:i},{2:i}{3:i}{4:i}{5:i}"	//id, ip array
+		"en"		"IP Address: {2}.{3}.{4}.{5} added to the database (id: {1})."
+	}
+	"rconwl_command_add_invalid_ip"
+	{
+		"en"		"Not a valid IP Address."
+	}
+	"rconwl_yes"
+	{
+		"en"		"Yes"
+	}
+	"rconwl_no"
+	{
+		"en"		"No"
+	}
+	"rconwl_notify_reload"
+	{
+		"en"		"Successfully reloaded RCON Whitelist's cache."
+	}
+	"rconwl_log_added"
+	{
+		"#format"	"{1:L},{2:i},{3:i},{4:i},{5:i},{6:i}"	//log client, id, ip array
+		"en"		"\"{1}\" added a new entry to the RCON Whitelist database. ID: {2}. IP: {3}.{4}.{5}.{6}."
+	}
+	"rconwl_log_disabled"
+	{
+		"#format"	"{1:L},{2:i},{3:i},{4:i},{5:i},{6:i}"	//log client, id, ip array
+		"en"		"\"{1}\" disabled an entry from the RCON Whitelist DB. ID: {2}. IP: {3}.{4}.{5}.{6}."
+	}
+	"rconwl_log_reload"
+	{
+		"#format"	"{1:L}"	//log client
+		"en"		"\"{1}\" Reloaded the RCON Whitelist Cache."
+	}
+}

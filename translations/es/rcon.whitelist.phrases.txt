@@ -1,0 +1,71 @@
+﻿"Phrases"
+{
+	"reloading_cache"
+	{
+		"es"		"Reconstruyendo lista de excepciones RCON..."
+	}
+	"done"
+	{
+		"es"		"Listo."
+	}
+	"allowed_rcon"
+	{
+		"es"		"Las conexiones a la RCON serán aceptadas unicamente desde estas IPs:"
+	}
+	"allowed_connecting"
+	{
+		"es"		"Conexión a la RCON entrante desde una de las IPs (%s) autorizadas (coincide con la dirección %i), se continuará con el proceso de autenticación normalmente..."
+	}
+	"log_allowed_connecting"
+	{
+		"es"		"Conexión a la RCON entrante desde una de las IPs (%s) autorizadas (coincide con la dirección %i) admitida"
+	}
+	"disallowed_connecting"
+	{
+		"es"		"Conexión a la RCON entrante desde una IP desconocida (%s), rechazando..."
+	}
+	"log_disallowed_connecting"
+	{
+		"es"		"Conexión a la RCON entrante desde una IP desconocida (%s) rechazda."
+	}
+	"connection_failed"
+	{
+		"es"		"No se pudo conectar con la base de datos. Error reportado: %s"
+	}
+	"failed_to_prepare"
+	{
+		"es"		"No se pudo preparar pedido ('%s') a la base de datos. Error reportado: %s"
+	}
+	"failed_to_reload"
+	{
+		"es"		"No se pudo actualizar el caché. Error reportado: %s"
+	}
+	"failed_to_get_addresses"
+	{
+		"es"		"No se pudo obtener las direcciones de la base de datos. Error reportado: %s"
+	}
+	"failed_execute_query"
+	{
+		"es"		"No se pudo realizar el pedido a la base de datos. Error reportado: %s"
+	}
+	"failed_to_insert"
+	{
+		"es"		"No se pudo insertar fila en la base de datos. Error reportado: %s"
+	}
+	"failed_to_retrive_last_id"
+	{
+		"es"		"No se pudo recibír el addressid desde la última inserción. Error reportado: %s"
+	}
+	"failed_to_fetch_last_id"
+	{
+		"es"		"No se pudo obtener el addressid de la última inserción. Error reportado: %s"
+	}
+	"failed_to_disable"
+	{
+		"es"		"No se pudo deshabilitar la dirección en la base de datos. Error reportado: %s"
+	}
+	"failed_to_get_info"
+	{
+		"es"		"No se pudo obtener información de la dirección en la base de datos. Error reportado: %s"
+	}
+}
