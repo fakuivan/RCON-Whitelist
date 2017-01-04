@@ -27,7 +27,7 @@ before_script:
     - mkdir ./plugins
 # And compile!
 script: 
-    - ./addons/sourcemod/scripting/spcomp ./addons/sourcemod/scripting/rcon_whitelist.sp -o./plugins/rcon_whitelist_manager.smx
+    - ./addons/sourcemod/scripting/spcomp ./addons/sourcemod/scripting/rcon_whitelist.sp -o./plugins/rcon_whitelist.smx
     - ./addons/sourcemod/scripting/spcomp ./addons/sourcemod/scripting/rcon_whitelist_manager.sp -o./plugins/rcon_whitelist_manager.smx
 
 before_deploy: zip -r rcon_whitelist.zip ./translations/ ./plugins/ ./scripting/ ./data/
