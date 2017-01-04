@@ -68,4 +68,24 @@
 	{
 		"en"		"Failed to get information of the address from the database. Reported error: %s"
 	}
+	"failed_to_insert_invalid_ip"
+	{
+		"en"		"%d.%d.%d.%d is not a valid IP Address."
+	}
+	"couldnt_find_table_name"
+	{
+		"en"		"Couldn't find table '%s'"
+	}
+	"creating_table"
+	{
+		"en"		"Creating table '%s'"
+	}
+	"failed_to_create_table"
+	{
+		"en"		"Failed to create table '%s'. Reported error: '%s'"
+	}
+	"inserting_address"
+	{
+		"en"		"Inserting address %d.%d.%d.%d onto the RCON Whitelist database"
+	}
 }

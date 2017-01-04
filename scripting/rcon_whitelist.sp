@@ -8,7 +8,7 @@
 #include <sourcemod>
 #include "rcon_whitelist/rcon_whitelist.inc"
 
-#define PLUGIN_VERSION "2.12"
+#define PLUGIN_VERSION "2.3"
 
 public Plugin myinfo = 
 {
@@ -37,8 +37,24 @@ public void OnPluginStart()
 	{
 		SetFailState("%T", "connection_failed", LANG_SERVER, s_error);
 	}
+
 	
+	char s_table_name[] = DB_TABLE_ALLOWED;
+	bool b_table_exists = SQLite_TableExists(gh_db, s_table_name, sizeof(s_table_name));
 	
+	if (!b_table_exists)
+	{
+		LogMessage("%T", "couldnt_find_table_name", LANG_SERVER, s_table_name);
+		LogMessage("%T", "creating_table", LANG_SERVER, s_table_name);
+		
+		if (!Make_Table(gh_db, s_error, sizeof(s_error)))
+		{
+			SetFailState("%T", "failed_to_create_table", LANG_SERVER, DB_TABLE_ALLOWED, s_error);
+		}
+		LogMessage("%T", "done", LANG_SERVER);
+	}
+	
+
 	gh_select_all = SQL_PrepareQuery(gh_db, PREPARED_SELECT_ALL, s_error, sizeof(s_error));
 	if (gh_select_all == INVALID_HANDLE)
 	{
@@ -75,7 +91,35 @@ public void OnPluginStart()
 	{
 		SetFailState("%T", "failed_to_get_addresses", LANG_SERVER, s_error);
 	}
+
+
+	if (!b_table_exists)
+	{
+		int i_default_loopback_ip[4] = RCONWL_DFLTL;
+		RCONWh_InsertResult i_result;
+		LogMessage("%T", "inserting_address", LANG_SERVER,	i_default_loopback_ip[0], 
+															i_default_loopback_ip[1], 
+															i_default_loopback_ip[2], 
+															i_default_loopback_ip[3]);
+		InsertAddress(i_default_loopback_ip, i_result, s_error, sizeof(s_error));
+		if (i_result == InsertResult_Success)
+		{
+			LogMessage("%T", "done", LANG_SERVER);
+		}
+		else if (i_result == InsertResult_Failed_NotAnIP)
+		{
+			LogError("%T", "failed_to_insert_invalid_ip", LANG_SERVER,	i_default_loopback_ip[0], 
+																		i_default_loopback_ip[1], 
+																		i_default_loopback_ip[2], 
+																		i_default_loopback_ip[3]);
+		}
+		else
+		{
+			LogError("%T", "failed_to_insert", LANG_SERVER, s_error);
+		}
+	}
 	
+
 	RegAdminCmd("sm_rconw_print_allowed", Command_GetAddresses, ADMFLAG_RCON, "Shows a list of the IP Addresses allowed to connect via RCON.");
 	RegAdminCmd("sm_rconw_reload_db",     Command_ReloadDB,     ADMFLAG_RCON, "Reloads the RCON Whitelist cache."                            );
 }
@@ -90,7 +134,11 @@ public Action Command_GetAddresses(int i_client, int i_args)
 	for (int i_index = 0; i_index < i_size; i_index++)
 	{
 		GetArrayArray(gh_cache_addresses, i_index, i_address_buff);
-		ReplyToCommand(i_client, "[SM] %i) %i.%i.%i.%i", i_address_buff[0], i_address_buff[2], i_address_buff[3], i_address_buff[4], i_address_buff[5]);
+		ReplyToCommand(i_client, "[SM] %i) %i.%i.%i.%i",	i_address_buff[0], 
+															i_address_buff[2], 
+															i_address_buff[3], 
+															i_address_buff[4], 
+															i_address_buff[5]);
 	}
 	ReplyToCommand(i_client, "[SM] %t", "done");
 	return Plugin_Handled;
@@ -189,6 +237,8 @@ public APLRes AskPluginLoad2(Handle h_myself, bool b_late, char[] s_error, int i
 	return APLRes_Success;
 }
 
+//db interfaces//
+
 Handle GetAddresses(bool b_get_disabled = false, char[] s_error = NULL_STRING, int i_sizeof_error = 0)
 {
 	Handle h_array;
@@ -253,7 +303,7 @@ bool GetAddressDetails(int i_id, int i_details[6], RCONWh_InsertResult &i_result
 	return true;
 }
 
-int InsertAddress(int i_ip[4], RCONWh_InsertResult &i_result, char[] s_error = NULL_STRING, int i_sizeof_error = 0)
+int InsertAddress(const int i_ip[4], RCONWh_InsertResult &i_result, char[] s_error = NULL_STRING, int i_sizeof_error = 0)
 {
 	if (IntArrayOutOfLimits(i_ip, 4, 0, 255))
 	{
@@ -292,7 +342,6 @@ bool SwitchAddress(int i_id, bool b_enabled, char[] s_error = NULL_STRING, int i
 	}
 	
 	int i_enabled = b_enabled ? 1 : 0; //I hate ternaries tho :u
-	PrintToServer("i_enabled: %i", i_enabled);
 	SQL_BindParamInt(gh_switch, 0, i_enabled);
 	SQL_BindParamInt(gh_switch, 1, i_id);
 	if (!SQL_Execute(gh_switch))
@@ -314,6 +363,15 @@ bool ReloadCache(char[] s_error = NULL_STRING, int i_sizeof_error = 0)
 	}
 	CloseHandle(gh_cache_addresses);
 	gh_cache_addresses = h_array;
+	return true;
+}
+
+bool Make_Table(Database h_db, char[] s_error, int i_sizeof_error)
+{
+	if (!SQL_FastQuery(h_db, DB_STATEMENT_MAKE))
+	{
+		return !SQL_GetError(h_db, s_error, i_sizeof_error);
+	}
 	return true;
 }
 

@@ -68,4 +68,24 @@
 	{
 		"es"		"No se pudo obtener información de la dirección en la base de datos. Error reportado: %s"
 	}
+	"failed_to_insert_invalid_ip"
+	{
+		"es"		"%d.%d.%d.%d No es una dirección IP válida."
+	}
+	"couldnt_find_table_name"
+	{
+		"es"		"No se pudo encontrar tabla '%s'"
+	}
+	"creating_table"
+	{
+		"es"		"Creando tabla '%s'"
+	}
+	"failed_to_create_table"
+	{
+		"es"		"No se pudo crear tabla '%s'. Error reportado: '%s'"
+	}
+	"inserting_address"
+	{
+		"es"		"Añadiendo dirección %d.%d.%d.%d en la base de datos de RCON Whitelist"
+	}
 }
