@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/38c3b04a78ae4891890f0b1fca2bd8c6)](https://www.codacy.com/app/fakuivan/RCON-Whitelist?utm_source=github.com&utm_medium=referral&utm_content=fakuivan/RCON-Whitelist&utm_campaign=badger)
 # RCON Whitelist (remake) [![Build Status](https://travis-ci.org/fakuivan/RCON-Whitelist.svg?branch=master)](https://travis-ci.org/fakuivan/RCON-Whitelist)
 A sourcemod plugin that adds a layer of security to the RCON protocol, limiting the the sources from where an RCON connection can be stablished.
 
