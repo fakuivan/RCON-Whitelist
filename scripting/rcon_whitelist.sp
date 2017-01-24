@@ -9,7 +9,7 @@
 #include <sourcemod>
 #include "rcon_whitelist/rcon_whitelist.inc"
 
-#define PLUGIN_VERSION "2.3"
+#define PLUGIN_VERSION "2.4"
 
 public Plugin myinfo = 
 {
