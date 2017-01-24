@@ -9,6 +9,7 @@
 ## that provides that functionality
 #/scripting/include/*.inc
 /scripting/include/smrcon.inc
+/scripting/include/think_hooks.inc
 
 ## Ignore sqlite databases
 /data/sqlite/*.sq3

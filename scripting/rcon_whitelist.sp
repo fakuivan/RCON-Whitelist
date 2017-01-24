@@ -1,6 +1,7 @@
 #define REQUIRE_EXTENSIONS
 #include <smrcon>
 #undef REQUIRE_EXTENSIONS
+#include <think_hooks>
 
 #pragma semicolon 1
 #pragma newdecls required
@@ -26,6 +27,8 @@ DBStatement gh_select_by_state;	//selects all of the enabled/disabled addresses
 DBStatement gh_select_by_id;	//selects an address by it's id
 DBStatement gh_insert;			//insterts a new address into the database
 DBStatement gh_switch;			//enables/disables an address given an id
+
+bool gb_think_hooks_loaded = false;
 
 public void OnPluginStart()
 {
@@ -123,6 +126,27 @@ public void OnPluginStart()
 	RegAdminCmd("sm_rconw_print_allowed", Command_GetAddresses, ADMFLAG_RCON, "Shows a list of the IP Addresses allowed to connect via RCON.");
 	RegAdminCmd("sm_rconw_reload_db",     Command_ReloadDB,     ADMFLAG_RCON, "Reloads the RCON Whitelist cache."                            );
 }
+ 
+public void OnAllPluginsLoaded()
+{
+	gb_think_hooks_loaded = LibraryExists(THINK_HOOKS_LIB_NAME);
+}
+ 
+public void OnLibraryRemoved(const char[] s_name)
+{
+	if (StrEqual(s_name, THINK_HOOKS_LIB_NAME))
+	{
+		gb_think_hooks_loaded = false;
+	}
+}
+ 
+public void OnLibraryAdded(const char[] s_name)
+{
+	if (StrEqual(s_name, THINK_HOOKS_LIB_NAME))
+	{
+		gb_think_hooks_loaded = true;
+	}
+}
 
 
 //command callbacks//
@@ -180,29 +204,34 @@ public Action SMRCon_OnAuth(int i_rconid, const char[] s_address, const char[] s
 		{
 			PushArrayCell(h_data, true);
 			PushArrayCell(h_data, i_cache[0]);
-			if (IsServerProcessing())
-			{
-				RequestFrame(Notify_OnNextGameFrame, h_data);
-			}
-			else { Notify_OnNextGameFrame(h_data); }
+			QueueNotify(h_data);
 			return Plugin_Continue;
 		}
 	}
 	PushArrayCell(h_data, false);
-	if (IsServerProcessing())
+	QueueNotify(h_data);
+	b_allow = false;
+	return Plugin_Changed;
+}
+
+void QueueNotify(Handle h_data)
+{
+	if (gb_think_hooks_loaded)
+	{
+		RequestThink(Notify_OnNextGameFrame, h_data);
+	}
+	else if (IsServerProcessing())
 	{
 		//this is not going to work when the server is not generating frames
 		RequestFrame(Notify_OnNextGameFrame, h_data);
 	}
 	else { Notify_OnNextGameFrame(h_data); }
-	b_allow = false;
-	return Plugin_Changed;
 }
 
-// We notify on the next frame because the output from the console is going to be
-// replicated to the remote console attempting to get in on authentication, 
-// you could call this a "security" enhancement because an "attacker" wouldn't 
-// know if he actually knows the password or if he just got rejected
+/* We notify on the next frame because the output from the console is going to be
+   replicated to the remote console attempting to get in on authentication, 
+   you could call this a "security" enhancement because an "attacker" wouldn't 
+   know if he actually knows the password or if he just got rejected */
 void Notify_OnNextGameFrame(any i_data)
 {
 	Handle h_data = view_as<Handle>(i_data);

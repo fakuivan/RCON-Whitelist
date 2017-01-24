@@ -21,6 +21,7 @@ install:
     - wget --input-file=http://sourcemod.net/smdrop/$SMVERSION/sourcemod-latest-linux
     - tar -xzf $(cat sourcemod-latest-linux)
     - wget https://raw.githubusercontent.com/psychonic/SMRCon/master/sourcemod/scripting/include/smrcon.inc -O ./addons/sourcemod/scripting/include/smrcon.inc
+    - wget https://raw.githubusercontent.com/fakuivan/Think-Hooks/master/include/think_hooks.inc -O ./addons/sourcemod/scripting/include/think_hooks.inc
 before_script:
     - cp -r ./scripting ./addons/sourcemod
     - chmod +x ./addons/sourcemod/scripting/spcomp
