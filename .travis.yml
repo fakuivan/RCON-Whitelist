@@ -22,24 +22,27 @@ install:
     - tar -xzf $(cat sourcemod-latest-linux)
     - wget https://raw.githubusercontent.com/psychonic/SMRCon/master/sourcemod/scripting/include/smrcon.inc -O ./addons/sourcemod/scripting/include/smrcon.inc
     - wget https://raw.githubusercontent.com/fakuivan/Think-Hooks/master/include/think_hooks.inc -O ./addons/sourcemod/scripting/include/think_hooks.inc
+    - COMMIT_NUMBER=$(git rev-list --count HEAD)
 before_script:
     - cp -r ./scripting ./addons/sourcemod
     - chmod +x ./addons/sourcemod/scripting/spcomp
     - mkdir ./plugins
+    - FILE=rcon_whitelist-n$COMMIT_NUMBER.zip
 # And compile!
 script: 
     - ./addons/sourcemod/scripting/spcomp ./addons/sourcemod/scripting/rcon_whitelist.sp -o./plugins/rcon_whitelist.smx
     - ./addons/sourcemod/scripting/spcomp ./addons/sourcemod/scripting/rcon_whitelist_manager.sp -o./plugins/rcon_whitelist_manager.smx
 
-before_deploy: zip -r rcon_whitelist.zip ./translations/ ./plugins/ ./scripting/ ./data/
+before_deploy: zip -r $FILE ./translations/ ./plugins/ ./scripting/ ./data/
 
 deploy:
     provider: releases
     api_key:
         secure: BIgYMD0egdZBq1OEWAEw3fAk9ECwH1mLiY3lkCng1x93rqTo641Ye80vEJMgOCp/FSfNGCAM2UQbPy5j7HvVdJZaXI+ZRxTe1bZ0KxTWeR48JVEq95/DHsqdzYH7a7TqbU6Sno3W4kJDAiSJY2RDK5DOcumqRbfECv/iC/PUkU/4kCVZhbHOHyKDgambe6S8kPpOXInR2herow8vDMJJY7gr1CKHF+LdA8oOWdzhkiex1S7JKgCwmJKdAGP4iI5kP7susBRMkBsygZ8hquAaVCH+Z9Wjn3lPDTLrQkkZxXUQYuxf9oK9FL+uqoS9VUWnMKVJ+q/QjX7HIcXJxn2/KDBxX1QT2C39P7JF6MMOvC3Y94yUhl5sxew8liY5UpmcWVOdT5pLFYctoiWKJZQ4Enoa0hsCnmPc5mXwXxbwCIDAer09b7l1CdOpeIA0r6xcvV61/Uac0hLnaIgdTfyPqaZDi1/K4rTadtv91p4p0dJzqXOoMiQxlR10WATkAs3mLjwsG0hGPf4Z0sQapiqMXYGM+st3j8mv67Z8xjG6V+GSdASOygIK+LEwM+C3t409wQObuxVIKVyGu1uGhuleeARBkZFciEUYpAIIHyP/2D04no90EKVTJwMT+eJDSCg2D0HuLGiGGAJjJWOqzTHxt18Z1RNmAxT/kRa7H6OEAS0=
-    file: "rcon_whitelist.zip"
+    file: $FILE
     skip_cleanup: true
     on:
+        condition: $SMVERSION = 1.8
         repo: fakuivan/RCON-Whitelist
         tags: true
 
